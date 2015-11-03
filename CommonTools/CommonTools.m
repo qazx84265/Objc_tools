@@ -20,7 +20,7 @@
  *  @return
  */
 + (NSString *)md5StringForData:(NSData*)data{
-    // const char *str = [string UTF8String];
+//    const char *str = [string UTF8String];
     unsigned char r[CC_MD5_DIGEST_LENGTH];
     CC_MD5(data.bytes, data.length, r);
     return [NSString stringWithFormat:@"%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x",
