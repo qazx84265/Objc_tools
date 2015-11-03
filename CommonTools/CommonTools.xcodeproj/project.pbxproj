@@ -1,0 +1,92 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXFileReference section */
+		ECFD38A81BE8651E0043F0F7 /* CommonTools.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommonTools.h; sourceTree = "<group>"; };
+		ECFD38A91BE8651E0043F0F7 /* CommonTools.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommonTools.m; sourceTree = "<group>"; };
+		ECFD38AA1BE865580043F0F7 /* CommonMacro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommonMacro.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		ECFD389F1BE864CE0043F0F7 = {
+			isa = PBXGroup;
+			children = (
+				ECFD38A61BE864F80043F0F7 /* Src */,
+			);
+			sourceTree = "<group>";
+		};
+		ECFD38A61BE864F80043F0F7 /* Src */ = {
+			isa = PBXGroup;
+			children = (
+				ECFD38A71BE8650C0043F0F7 /* Common */,
+			);
+			name = Src;
+			sourceTree = "<group>";
+		};
+		ECFD38A71BE8650C0043F0F7 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				ECFD38A81BE8651E0043F0F7 /* CommonTools.h */,
+				ECFD38A91BE8651E0043F0F7 /* CommonTools.m */,
+				ECFD38AA1BE865580043F0F7 /* CommonMacro.h */,
+			);
+			name = Common;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXProject section */
+		ECFD38A01BE864CE0043F0F7 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0700;
+			};
+			buildConfigurationList = ECFD38A31BE864CE0043F0F7 /* Build configuration list for PBXProject "CommonTools" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = ECFD389F1BE864CE0043F0F7;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+			);
+		};
+/* End PBXProject section */
+
+/* Begin XCBuildConfiguration section */
+		ECFD38A41BE864CE0043F0F7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Debug;
+		};
+		ECFD38A51BE864CE0043F0F7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		ECFD38A31BE864CE0043F0F7 /* Build configuration list for PBXProject "CommonTools" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ECFD38A41BE864CE0043F0F7 /* Debug */,
+				ECFD38A51BE864CE0043F0F7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = ECFD38A01BE864CE0043F0F7 /* Project object */;
+}
