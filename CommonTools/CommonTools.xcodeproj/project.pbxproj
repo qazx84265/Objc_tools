@@ -7,12 +7,23 @@
 	objects = {
 
 /* Begin PBXFileReference section */
+		EC79382F1C1EB52000E66BF6 /* FBProgressWebViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FBProgressWebViewController.h; sourceTree = "<group>"; };
+		EC7938301C1EB52000E66BF6 /* FBProgressWebViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FBProgressWebViewController.m; sourceTree = "<group>"; };
 		ECFD38A81BE8651E0043F0F7 /* CommonTools.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommonTools.h; sourceTree = "<group>"; };
 		ECFD38A91BE8651E0043F0F7 /* CommonTools.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommonTools.m; sourceTree = "<group>"; };
 		ECFD38AA1BE865580043F0F7 /* CommonMacro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommonMacro.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
+		EC79382E1C1EB4FF00E66BF6 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				EC79382F1C1EB52000E66BF6 /* FBProgressWebViewController.h */,
+				EC7938301C1EB52000E66BF6 /* FBProgressWebViewController.m */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
 		ECFD389F1BE864CE0043F0F7 = {
 			isa = PBXGroup;
 			children = (
@@ -23,6 +34,7 @@
 		ECFD38A61BE864F80043F0F7 /* Src */ = {
 			isa = PBXGroup;
 			children = (
+				EC79382E1C1EB4FF00E66BF6 /* Controllers */,
 				ECFD38A71BE8650C0043F0F7 /* Common */,
 			);
 			name = Src;
