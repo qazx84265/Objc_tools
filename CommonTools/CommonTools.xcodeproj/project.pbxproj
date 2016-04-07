@@ -9,6 +9,8 @@
 /* Begin PBXFileReference section */
 		EC79382F1C1EB52000E66BF6 /* FBProgressWebViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FBProgressWebViewController.h; sourceTree = "<group>"; };
 		EC7938301C1EB52000E66BF6 /* FBProgressWebViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FBProgressWebViewController.m; sourceTree = "<group>"; };
+		ECA822F91CB5EC71001BF86F /* FBPasswordInput.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FBPasswordInput.h; sourceTree = "<group>"; };
+		ECA822FA1CB5EC71001BF86F /* FBPasswordInput.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FBPasswordInput.m; sourceTree = "<group>"; };
 		ECB931651C1FA27C00D119B6 /* FBParseListingData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FBParseListingData.h; sourceTree = "<group>"; };
 		ECB931661C1FA27C00D119B6 /* FBParseListingData.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FBParseListingData.m; sourceTree = "<group>"; };
 		ECFD38A81BE8651E0043F0F7 /* CommonTools.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommonTools.h; sourceTree = "<group>"; };
@@ -24,6 +26,15 @@
 				EC7938301C1EB52000E66BF6 /* FBProgressWebViewController.m */,
 			);
 			name = Controllers;
+			sourceTree = "<group>";
+		};
+		ECA822F81CB5EC33001BF86F /* Custom */ = {
+			isa = PBXGroup;
+			children = (
+				ECA822F91CB5EC71001BF86F /* FBPasswordInput.h */,
+				ECA822FA1CB5EC71001BF86F /* FBPasswordInput.m */,
+			);
+			name = Custom;
 			sourceTree = "<group>";
 		};
 		ECB931641C1FA26500D119B6 /* FTP */ = {
@@ -45,6 +56,7 @@
 		ECFD38A61BE864F80043F0F7 /* Src */ = {
 			isa = PBXGroup;
 			children = (
+				ECA822F81CB5EC33001BF86F /* Custom */,
 				ECB931641C1FA26500D119B6 /* FTP */,
 				EC79382E1C1EB4FF00E66BF6 /* Controllers */,
 				ECFD38A71BE8650C0043F0F7 /* Common */,

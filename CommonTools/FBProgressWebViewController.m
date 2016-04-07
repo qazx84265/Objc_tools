@@ -312,11 +312,15 @@
 
 - (void)setLoadCount:(NSUInteger)loadCount {
     
-    self.loadCount = loadCount;
-    if (self.loadCount == 0) {
+    _loadCount = loadCount;
+    
+    if (_loadCount == 0) {
+        
         [self.progressView setHidden:YES];
         [self.progressView setProgress:0 animated:YES];
-    } else {
+    }
+    else {
+        
         [self.progressView setHidden:NO];
         CGFloat oldP = self.progressView.progress;
         CGFloat newP = (1.0 - oldP) / (loadCount + 1) + oldP;
