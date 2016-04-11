@@ -9,6 +9,20 @@
 /* Begin PBXFileReference section */
 		EC79382F1C1EB52000E66BF6 /* FBProgressWebViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FBProgressWebViewController.h; sourceTree = "<group>"; };
 		EC7938301C1EB52000E66BF6 /* FBProgressWebViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FBProgressWebViewController.m; sourceTree = "<group>"; };
+		EC947D691CBBB4370049F300 /* FBPasswordInputView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FBPasswordInputView.h; sourceTree = "<group>"; };
+		EC947D6A1CBBB4370049F300 /* FBPasswordInputView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FBPasswordInputView.m; sourceTree = "<group>"; };
+		EC947D6B1CBBB4370049F300 /* NSCalendar+Extend.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSCalendar+Extend.h"; sourceTree = "<group>"; };
+		EC947D6C1CBBB4380049F300 /* NSCalendar+Extend.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSCalendar+Extend.m"; sourceTree = "<group>"; };
+		EC947D6D1CBBB4380049F300 /* NSDate+Extend.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSDate+Extend.h"; sourceTree = "<group>"; };
+		EC947D6E1CBBB4380049F300 /* NSDate+Extend.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Extend.m"; sourceTree = "<group>"; };
+		EC947D6F1CBBB4380049F300 /* UIColor+Extend.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIColor+Extend.h"; sourceTree = "<group>"; };
+		EC947D701CBBB4380049F300 /* UIColor+Extend.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Extend.m"; sourceTree = "<group>"; };
+		EC947D711CBBB4380049F300 /* UIImage+Extend.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIImage+Extend.h"; sourceTree = "<group>"; };
+		EC947D721CBBB4380049F300 /* UIImage+Extend.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Extend.m"; sourceTree = "<group>"; };
+		EC947D731CBBB4380049F300 /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageEffects.h"; sourceTree = "<group>"; };
+		EC947D741CBBB4380049F300 /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageEffects.m"; sourceTree = "<group>"; };
+		EC947D751CBBB4380049F300 /* ZTMapSelectActsheet.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZTMapSelectActsheet.h; sourceTree = "<group>"; };
+		EC947D761CBBB4380049F300 /* ZTMapSelectActsheet.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZTMapSelectActsheet.m; sourceTree = "<group>"; };
 		ECA822F91CB5EC71001BF86F /* FBPasswordInput.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FBPasswordInput.h; sourceTree = "<group>"; };
 		ECA822FA1CB5EC71001BF86F /* FBPasswordInput.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FBPasswordInput.m; sourceTree = "<group>"; };
 		ECB931651C1FA27C00D119B6 /* FBParseListingData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FBParseListingData.h; sourceTree = "<group>"; };
@@ -31,6 +45,20 @@
 		ECA822F81CB5EC33001BF86F /* Custom */ = {
 			isa = PBXGroup;
 			children = (
+				EC947D691CBBB4370049F300 /* FBPasswordInputView.h */,
+				EC947D6A1CBBB4370049F300 /* FBPasswordInputView.m */,
+				EC947D6B1CBBB4370049F300 /* NSCalendar+Extend.h */,
+				EC947D6C1CBBB4380049F300 /* NSCalendar+Extend.m */,
+				EC947D6D1CBBB4380049F300 /* NSDate+Extend.h */,
+				EC947D6E1CBBB4380049F300 /* NSDate+Extend.m */,
+				EC947D6F1CBBB4380049F300 /* UIColor+Extend.h */,
+				EC947D701CBBB4380049F300 /* UIColor+Extend.m */,
+				EC947D711CBBB4380049F300 /* UIImage+Extend.h */,
+				EC947D721CBBB4380049F300 /* UIImage+Extend.m */,
+				EC947D731CBBB4380049F300 /* UIImage+ImageEffects.h */,
+				EC947D741CBBB4380049F300 /* UIImage+ImageEffects.m */,
+				EC947D751CBBB4380049F300 /* ZTMapSelectActsheet.h */,
+				EC947D761CBBB4380049F300 /* ZTMapSelectActsheet.m */,
 				ECA822F91CB5EC71001BF86F /* FBPasswordInput.h */,
 				ECA822FA1CB5EC71001BF86F /* FBPasswordInput.m */,
 			);
