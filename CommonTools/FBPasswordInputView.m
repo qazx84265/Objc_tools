@@ -7,6 +7,7 @@
 //
 
 #import "FBPasswordInputView.h"
+#import "UITextField+Responder.h"
 
 #define PWD_LENGTH_PER_TF  1 //单个textField 文本长度，固定为1
 #define PWD_DEFAULT_LENGTH 6 //默认密码长度
@@ -170,7 +171,9 @@ NSString *const FBPasswordInputDidCompleteNotification = @"com.purelake.FBPasswo
     //real text field
     _mPwdTF = [[UITextField alloc] initWithFrame:CGRectMake(5, 5, selfw-5*2, selfh-5*2)];
     _mPwdTF.delegate = self;
+    _mPwdTF.textAlignment = NSTextAlignmentRight;
     _mPwdTF.secureTextEntry = YES;
+    _mPwdTF.countOfBecomingFirstResponder = 0;
     _mPwdTF.keyboardType = [self configKeyboardWithType:_mType];
     [self addSubview:_mPwdTF];
     
@@ -186,7 +189,7 @@ NSString *const FBPasswordInputDidCompleteNotification = @"com.purelake.FBPasswo
         view.layer.cornerRadius = _corRadius;
     }
     [self addSubview:view];
-
+    
     
     
     
@@ -210,7 +213,7 @@ NSString *const FBPasswordInputDidCompleteNotification = @"com.purelake.FBPasswo
             linev.backgroundColor = [UIColor darkGrayColor];
             [view addSubview:linev];
         }
-
+        
     }
     
     //--
@@ -223,9 +226,33 @@ NSString *const FBPasswordInputDidCompleteNotification = @"com.purelake.FBPasswo
 }
 
 - (void)edit:(UITapGestureRecognizer*)tapGes {
+    id target = self;
+    while (target) {
+        target = ((UIResponder *)target).nextResponder;
+        if ([target isKindOfClass:[UIViewController class]]) {
+            break;
+        }
+    }
+    
+    UIViewController *vc = target;
+    [self resignOthers:vc.view];
     
     [self beginInput];
 }
+
+- (void)resignOthers:(UIView*)view {
+    for (UIView *v in view.subviews) {
+        if ([v isKindOfClass:[self class]]) {
+            
+            FBPasswordInputView *pv = (FBPasswordInputView*)v;
+            [pv endInput];
+        }
+        else {
+            [self resignOthers:v];
+        }
+    }
+}
+
 
 #pragma mark -- cursor -- 光标模拟
 
@@ -334,11 +361,11 @@ NSString *const FBPasswordInputDidCompleteNotification = @"com.purelake.FBPasswo
 
 
 - (void)tfChanged:(NSNotification*)noti {
-
+    
     UITextField *tf = noti.object;
-    
-    
-    __weak typeof(self) weakSelf = self;
+    if (![tf isEqual:_mPwdTF]) {
+        return;
+    }
     
     //input
     NSInteger len  = tf.text.length;
@@ -367,16 +394,16 @@ NSString *const FBPasswordInputDidCompleteNotification = @"com.purelake.FBPasswo
         }
     }
     
-     _mPwd = tf.text;
-    NSLog(@"---- pwd change--- %@", _mPwd);
+    _mPwd = tf.text;
     
     if (_mPwd.length == PWD_DEFAULT_LENGTH) {
-
+        
+        __weak typeof(self) weakSelf = self;
         if (self.pwdInputCompleteBlk) {
             self.pwdInputCompleteBlk(_mPwd, weakSelf);
         }
         
-//        [self clearPassword];
+        //        [self clearPassword];
     }
 }
 
@@ -391,7 +418,9 @@ NSString *const FBPasswordInputDidCompleteNotification = @"com.purelake.FBPasswo
 }
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
-
+    if ([textField isEqual:_mPwdTF]) {
+        _mPwdTF.countOfBecomingFirstResponder += 1;
+    }
 }
 
 
@@ -402,49 +431,102 @@ NSString *const FBPasswordInputDidCompleteNotification = @"com.purelake.FBPasswo
 
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
-
     
-    // password limits
-    if (range.location + range.length  > textField.text.length) {
-        return NO;
+    if ([textField isEqual:_mPwdTF]) {
+        
+        //        // 防止重新获得焦点，退格清空内容
+        //        if (range.location > 0 && range.length == 1 && string.length == 0) {
+        //
+        //            textField.text = [textField.text substringToIndex:textField.text.length - 1];
+        //            _mPwd = textField.text;
+        //            if (textField.text.length != 0 && textField.text.length != PWD_DEFAULT_LENGTH-1) {
+        //                [self setCursor:textField.text.length];
+        //            }
+        //            UILabel *lb = [_pwdLbs objectAtIndex:textField.text.length];
+        //            lb.text = @"";
+        //
+        //            return NO;
+        //        }
+        
+        
+        /*防止重新获取焦点后 输入 或 键盘退格 会清空内容*/
+        /*重新获得焦点后键盘退格删除*/
+        BOOL becomeFirstResponderAgainAndBackspace = textField.countOfBecomingFirstResponder>1 && string.length == 0 && range.length == 1;
+        /*重新获得焦点后输入*/
+        BOOL becomeFirstResponderAgainAndInput = textField.countOfBecomingFirstResponder>1 && range.length ==0 && string.length != 0;
+        
+        if (becomeFirstResponderAgainAndBackspace || becomeFirstResponderAgainAndInput) {
+            
+            // Stores cursor position
+            UITextPosition *beginning = textField.beginningOfDocument;
+            UITextPosition *start = [textField positionFromPosition:beginning offset:range.location];
+            NSInteger cursorOffset = [textField offsetFromPosition:beginning toPosition:start] + string.length;
+            
+            // Save the current text, in case iOS deletes the whole text
+            NSString *text = textField.text;
+            
+            // Trigger deletion
+            if (becomeFirstResponderAgainAndBackspace){
+                [textField deleteBackward];
+            }
+            
+            
+            // iOS deleted the entire string
+            if (textField.text.length != text.length - 1)
+            {
+                textField.text = [text stringByReplacingCharactersInRange:range withString:string];
+                
+                // Update cursor position
+                UITextPosition *newCursorPosition = [textField positionFromPosition:textField.beginningOfDocument offset:cursorOffset];
+                UITextRange *newSelectedRange = [textField textRangeFromPosition:newCursorPosition toPosition:newCursorPosition];
+                [textField setSelectedTextRange:newSelectedRange];
+            }
+            return NO;
+        }
+        
+        // password limits
+        if (range.location + range.length  > textField.text.length) {
+            return NO;
+        }
+        
+        //limit
+        NSCharacterSet *blockedCharacters;
+        
+        switch (_mType) {
+                
+            case PasswordType_Number:{
+                
+                blockedCharacters = [[NSCharacterSet decimalDigitCharacterSet] invertedSet];
+            } break;
+            case PasswordType_Alpha: {
+                
+                blockedCharacters = [[NSCharacterSet letterCharacterSet] invertedSet];
+            } break;
+            case PasswordType_AlphaNumber: {
+                
+                blockedCharacters = [[NSCharacterSet alphanumericCharacterSet] invertedSet];
+            } break;
+            case PasswordType_AlphaNumberSymbol:{
+                
+                NSMutableCharacterSet *set = [NSMutableCharacterSet alphanumericCharacterSet];
+                [set formUnionWithCharacterSet:[NSCharacterSet symbolCharacterSet]];
+                blockedCharacters = [set invertedSet];
+            } break;
+                
+            default:
+                break;
+        }
+        if ([string rangeOfCharacterFromSet:blockedCharacters].location != NSNotFound) {
+            return NO;
+        }
+        
+        
+        // limit length
+        NSUInteger newLength = [textField.text length] + [string length] - range.length;
+        return newLength <= PWD_DEFAULT_LENGTH;
     }
     
-    //limit
-    NSCharacterSet *blockedCharacters;
-    
-    switch (_mType) {
-            
-        case PasswordType_Number:{
-            
-            blockedCharacters = [[NSCharacterSet decimalDigitCharacterSet] invertedSet];
-        } break;
-        case PasswordType_Alpha: {
-            
-            blockedCharacters = [[NSCharacterSet letterCharacterSet] invertedSet];
-        } break;
-        case PasswordType_AlphaNumber: {
-            
-            blockedCharacters = [[NSCharacterSet alphanumericCharacterSet] invertedSet];
-        } break;
-        case PasswordType_AlphaNumberSymbol:{
-            
-            NSMutableCharacterSet *set = [NSMutableCharacterSet alphanumericCharacterSet];
-            [set formUnionWithCharacterSet:[NSCharacterSet symbolCharacterSet]];
-            blockedCharacters = [set invertedSet];
-        } break;
-            
-        default:
-            break;
-    }
-    if ([string rangeOfCharacterFromSet:blockedCharacters].location != NSNotFound) {
-        return NO;
-    }
-    
-    
-    // limit length
-    NSUInteger newLength = [textField.text length] + [string length] - range.length;
-    return newLength <= PWD_DEFAULT_LENGTH;
-    
+    return YES;
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
@@ -466,7 +548,7 @@ NSString *const FBPasswordInputDidCompleteNotification = @"com.purelake.FBPasswo
     }
     
     if (!_isCursorAnim) {
-        [self startCursor];
+        [self clearPassword];
     }
     
 }
@@ -486,15 +568,20 @@ NSString *const FBPasswordInputDidCompleteNotification = @"com.purelake.FBPasswo
 
 
 - (void)clearPassword {
-    _mPwd = @"";
-    _mPwdTF.text = @"";
-    
-    for (UILabel* lb in _pwdLbs) {
-        lb.text = @"";
+    if (![_mPwd isEqualToString:@""]) {
+        
+        _mPwd = @"";
+        _mPwdTF.text = @"";
+        
+        for (UILabel* lb in _pwdLbs) {
+            lb.text = @"";
+        }
+        
+        [self setCursor:0];
     }
-    
-    [self setCursor:0];
 }
+
+
 
 
 - (NSString*)pwd {
