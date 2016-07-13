@@ -14,8 +14,15 @@
 //NavBar高度
 #define kNAVIGATION_BAR_HEIGHT 44
 //获取屏幕 宽度、高度
-#define kSCREEN_WIDTH ([UIScreen mainScreen].bounds.size.width)
-#define kSCREEN_HEIGHT ([UIScreen mainScreen].bounds.size.height)
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 80000 
+#define kSCREEN_WIDTH ([[UIScreen mainScreen] respondsToSelector:@selector(nativeBounds)]?[UIScreen mainScreen].nativeBounds.size.width/[UIScreen mainScreen].nativeScale:[UIScreen mainScreen].bounds.size.width)
+#define kSCREEN_HEIGHT ([[UIScreen mainScreen] respondsToSelector:@selector(nativeBounds)]?[UIScreen mainScreen].nativeBounds.size.height/[UIScreen mainScreen].nativeScale:[UIScreen mainScreen].bounds.size.height)
+#define kSCREEN_SIZE ([[UIScreen mainScreen] respondsToSelector:@selector(nativeBounds)]?CGSizeMake([UIScreen mainScreen].nativeBounds.size.width/[UIScreen mainScreen].nativeScale,[UIScreen mainScreen].nativeBounds.size.height/[UIScreen mainScreen].nativeScale):[UIScreen mainScreen].bounds.size)
+#else
+#define kSCREEN_WIDTH [UIScreen mainScreen].bounds.size.width
+#define kSCREEN_HEIGHT [UIScreen mainScreen].bounds.size.height
+#define kSCREEN_SIZE [UIScreen mainScreen].bounds.size
+#endif
 //-------------------获取设备大小-------------------------
 
 
@@ -252,7 +259,8 @@ return nil; \
 return self; \
 }
 
-
+#define weakSelf(type)  __weak typeof(type) weak##type = type;
+#define strongSelf(type)  __strong typeof(type) type = weak##type;
 
 
 #endif /* CommonMacro_h */
