@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface FBProgressWebViewController : UIViewController
+@property (nonatomic, assign) BOOL showRightBtns;
 + (void)showInViewController:(UIViewController*)viewController withURLString:(NSString*)urlString withTitle:(NSString*)title;
 @end
