@@ -33,6 +33,7 @@
 + (void)showInViewController:(UIViewController *)viewController withURLString:(NSString *)urlString withTitle:(NSString *)title {
     urlString = [urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     FBProgressWebViewController *pwvc = [[FBProgressWebViewController alloc] init];
+    pwvc.showRightBtns = YES;
     pwvc.homeURL = [NSURL URLWithString:urlString];
     pwvc.title = title;
     
@@ -47,7 +48,9 @@
     
     [self configUI];
     [self configLeftBarItems];
-    [self configRightBarItems];
+    if (self.showRightBtns) {
+        [self configRightBarItems];
+    }
 }
 
 
@@ -66,8 +69,21 @@
     
     //web view
     if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0) {
-        self.wkwebView = [[WKWebView alloc] initWithFrame:self.view.bounds];
+        WKWebViewConfiguration* config = [[WKWebViewConfiguration alloc] init];
+        WKPreferences* preferences = [[WKPreferences alloc] init];
+        preferences.javaScriptEnabled = YES;
+        preferences.javaScriptCanOpenWindowsAutomatically = YES;
+        config.preferences = preferences;
+
+        NSString *jScript = @"var meta = document.createElement('meta'); meta.setAttribute('name', 'viewport'); meta.setAttribute('content', 'width=device-width'); document.getElementsByTagName('head')[0].appendChild(meta);";
+        WKUserScript *wkUScript = [[WKUserScript alloc] initWithSource:jScript injectionTime:WKUserScriptInjectionTimeAtDocumentEnd forMainFrameOnly:YES];
+        WKUserContentController *wkUController = [[WKUserContentController alloc] init];
+        [wkUController addUserScript:wkUScript];
+        config.userContentController = wkUController;
+
+        self.wkwebView = [[WKWebView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame)-64) configuration:config];
         self.wkwebView.navigationDelegate = self;
+        self.wkwebView.UIDelegate = self;
         [self.view insertSubview:self.wkwebView belowSubview:self.progressView];
         
         //kvo
