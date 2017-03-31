@@ -32,7 +32,7 @@ static char *kNavBarBgAlphaKey = "navBarBgAlphaKey";
      objc_setAssociatedObject(id object, const void *key, id value, objc_AssociationPolicy policy);
      */
     
-    objc_setAssociatedObject(self, kNavBarBgAlphaKey, @(navBarBgAlpha), OBJC_ASSOCIATION_ASSIGN);
+    objc_setAssociatedObject(self, kNavBarBgAlphaKey, @(navBarBgAlpha), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     
     // 设置导航栏透明度（利用Category自己添加的方法）
     [self.navigationController setNeedsNavigationBackground:navBarBgAlpha];
