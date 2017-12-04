@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXFileReference section */
+		256B9E151F9B9EC8008B053E /* media */ = {isa = PBXFileReference; lastKnownFileType = folder; path = media; sourceTree = "<group>"; };
 		25A491D01E8E2A5800A7F02D /* UINavigationController+NavBarAlpha.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+NavBarAlpha.h"; sourceTree = "<group>"; };
 		25A491D11E8E2A5800A7F02D /* UINavigationController+NavBarAlpha.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+NavBarAlpha.m"; sourceTree = "<group>"; };
 		25A491D21E8E2A5800A7F02D /* UIViewController+NavBarAlpha.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIViewController+NavBarAlpha.h"; sourceTree = "<group>"; };
@@ -92,6 +93,7 @@
 		ECFD38A61BE864F80043F0F7 /* Src */ = {
 			isa = PBXGroup;
 			children = (
+				256B9E151F9B9EC8008B053E /* media */,
 				ECA822F81CB5EC33001BF86F /* Custom */,
 				ECB931641C1FA26500D119B6 /* FTP */,
 				EC79382E1C1EB4FF00E66BF6 /* Controllers */,
